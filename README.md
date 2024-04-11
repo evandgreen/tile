@@ -20,6 +20,11 @@ Type=XSession
 ```  
 then, ```chown root:root !$``` and ```chmod 644 !$```  
 
+##TODO
+
+- port from Xlib to XCB
+- add entensibility via plugins
+
 ## sources
 
 tronche HTML Xlib Programming Manual https://tronche.com/gui/x/xlib/  
