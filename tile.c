@@ -74,9 +74,9 @@ void handle_keypress(XKeyEvent event)
 		system("st &");
 	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("p")))
 		system("dmenu_run &");
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("f"))):
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("f")))
 		system("firefox &");
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q"))):
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q")))
 		XDestroyWindow(dpy, event.subwindow);
 }
 
