@@ -8,7 +8,7 @@ a lightweight tiling window manager for Xorg, with an emphasis on minimalism and
 as superuser, run ```make install```, then append ```exec twix``` to your ```.xinitrc``` file.
 
 ### using a display manager
-as superuser, create ```/usr/share/xsessions/twix.desktop```, like
+as superuser, create ```/usr/share/xsessions/twix.desktop```:
 ```
 [Desktop Entry]
 Encoding=UTF-8
@@ -20,15 +20,11 @@ Type=XSession
 ```  
 then, ```chown root:root !$``` and ```chmod 644 !$```  
 
-## TODO
-
-- port from Xlib to XCB
-- add entensibility via plugins
-
 ## sources
 
+dynamic window manager https://suckless.org/dwm  
+i3wm https://github.com/i3/i3  
 tronche HTML Xlib Programming Manual https://tronche.com/gui/x/xlib/  
 tronche Inter-Client Communications Conventions Manual https://tronche.com/gui/x/icccm/  
 Extended Window Manager Hints https://specifications.freedesktop.org/wm-spec/wm-spec-1.3.html  
-dynamic window manager https://suckless.org/dwm  
 Xlib - C Language X Interface https://www.x.org/releases/current/doc/libX11/libX11/libX11.html  
