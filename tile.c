@@ -70,20 +70,14 @@ void map_window(const XMapRequestEvent event)
 
 void handle_keypress(XKeyEvent event)
 {
-	switch(event.keycode) {
-	case (XKeysymToKeycode(dpy, XStringToKeysym("Return"))):
+	if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return")))
 		system("st &");
-		break;
-	case (XKeysymToKeycode(dpy, XStringToKeysym("p"))):
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("p")))
 		system("dmenu_run &");
-		break;
-	case (XKeysymToKeycode(dpy, XStringToKeysym("f"))):
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("f"))):
 		system("firefox &");
-		break;
-	case (XKeysymToKeycode(dpy, XStringToKeysym("q"))):
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q"))):
 		XDestroyWindow(dpy, event.subwindow);
-		break;
-	}
 }
 
 void grabkey(char *key)
