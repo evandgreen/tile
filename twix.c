@@ -20,8 +20,6 @@ int main(int argc, char *argv[])
 {
 	XWindowAttributes attr;
 	XEvent event;
-	XButtonEvent start;
-
 	
 	if (!(dpy = XOpenDisplay(NULL))) {
 		printf("unable to open display server\n");
@@ -30,9 +28,8 @@ int main(int argc, char *argv[])
 
 	grabkey("Return");
 	grabkey("p");
+	grabkey("f");
 	grabkey("q");
-
-	start.subwindow = None;
 
 	while (1) {
 		XNextEvent(dpy, &event);
@@ -77,9 +74,11 @@ void handle_keypress(XKeyEvent event)
 	if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return"))) {
 		system("st &");
 	} else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("p"))) {
+		system("dmenu_run &");
+	} else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("f"))) {
 		system("firefox &");
 	} else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q"))) {
-		XCloseDisplay(dpy);
+		XDestroyWindow(dpy, event.subwindow);
 	}
 }
 
