@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	if (!(dpy = XOpenDisplay(NULL))) {
 		printf("unable to open display server\n");
 		return 1;
-	} else printf("successfully opened display server\n");
+	} else printf("opening display server...\n");
 
 	grabkey("Return");
 	grabkey("p");
