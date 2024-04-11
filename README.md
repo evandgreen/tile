@@ -23,7 +23,7 @@ then, ```chown root:root !$``` and ```chmod 644 !$```
 ## sources
 
 dynamic window manager https://suckless.org/dwm  
-i3wm https://github.com/i3/i3  
+tinywm https://github.com/mackstann/tinywm  
 tronche HTML Xlib Programming Manual https://tronche.com/gui/x/xlib/  
 tronche Inter-Client Communications Conventions Manual https://tronche.com/gui/x/icccm/  
 Extended Window Manager Hints https://specifications.freedesktop.org/wm-spec/wm-spec-1.3.html  
