@@ -20,7 +20,7 @@ Type=XSession
 ```  
 then, ```chown root:root !$``` and ```chmod 644 !$```  
 
-##TODO
+## TODO
 
 - port from Xlib to XCB
 - add entensibility via plugins
