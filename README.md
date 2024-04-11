@@ -8,7 +8,7 @@ a lightweight tiling window manager for Xorg, with an emphasis on minimalism and
 as superuser, run ```make install```, then append ```exec twix``` to your ```.xinitrc``` file.
 
 ### using a display manager
-as superuser, create ```/usr/share/xsessions/twix.desktop```, like\
+as superuser, create ```/usr/share/xsessions/twix.desktop```, like
 ```
 [Desktop Entry]
 Encoding=UTF-8
