@@ -1,21 +1,21 @@
-# tiling window interface for X
+# tiling window manager for X
 
 a lightweight tiling window manager for Xorg, with an emphasis on minimalism and functionality
 
 ## installation
 
 ### using xinit
-as superuser, run ```make install```, then append ```exec twix``` to your ```.xinitrc``` file.
+as superuser, run ```make install```, then append ```exec tile``` to your ```.xinitrc``` file.
 
 ### using a display manager
-as superuser, create ```/usr/share/xsessions/twix.desktop```:
+as superuser, create ```/usr/share/xsessions/tile.desktop```:
 ```
 [Desktop Entry]
 Encoding=UTF-8
-Name=twix
-Comment=tiling window interface for X
-Exec=twix
-Icon=twix
+Name=tile
+Comment=tiling window manager
+Exec=tile
+Icon=tile
 Type=XSession
 ```  
 then, ```chown root:root !$``` and ```chmod 644 !$```  
