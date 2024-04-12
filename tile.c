@@ -4,10 +4,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define BROWSER_CMD "firefox &"
 #define TERMINAL_CMD "st &"
 
 Display *dpy;
+Screen *screen;
 
 /* prototyping*/
 void configure_window(const XConfigureRequestEvent event);
@@ -25,10 +25,12 @@ int main(int argc, char *argv[])
 		return 1;
 	} else printf("opening display server...\n");
 
+	screen = DefaultScreenOfDisplay(dpy);
+
 	grabkey("Return");
-	grabkey("p");
-	grabkey("f");
+	grabkey("c");
 	grabkey("q");
+	grabkey("p");
 
 	while (1) {
 		XNextEvent(dpy, &event);
@@ -55,7 +57,7 @@ void configure_window(const XConfigureRequestEvent event)
 	XWindowChanges change;
 	change.x = event.x;
 	change.y = event.y;
-	change.width = event.width;
+	change.width = event.width;	
 	change.height = event.height;
 	change.border_width = event.border_width;
 	change.sibling = event.above;
@@ -71,13 +73,13 @@ void map_window(const XMapRequestEvent event)
 void handle_keypress(XKeyEvent event)
 {
 	if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return")))
-		system("st &");
+		system(TERMINAL_CMD);
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("c")))
+		XKillClient(dpy, event.subwindow);
+	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q")))
+		XCloseDisplay(dpy);
 	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("p")))
 		system("dmenu_run &");
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("f")))
-		system("firefox &");
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q")))
-		XDestroyWindow(dpy, event.subwindow);
 }
 
 void grabkey(char *key)
