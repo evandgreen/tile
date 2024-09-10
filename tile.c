@@ -4,16 +4,25 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define TERMINAL_CMD "st &"
+/* configuration */
+#define CMD_TERM "st &"
+#define CMD_DMENU "dmenu_run &"
 
-Display *dpy;
-Screen *screen;
+#define KEY_MOD Mod1Mask | ShiftMask
+#define KEY_TERM XK_Return
+#define KEY_CYCLE XK_j
+#define KEY_CYCLE_DOWN XK_k
+#define KEY_CLOSE XK_c
+#define KEY_EXIT XK_Delete
+#define KEY_DMENU XK_p
 
-/* prototyping*/
 void configure_window(const XConfigureRequestEvent event);
 void map_window(const XMapRequestEvent event);
 void handle_keypress(XKeyEvent event);
-void grabkey(char *key);
+void grabkey(int key);
+
+Display *dpy;
+Screen *screen;
 
 int main(int argc, char *argv[])
 {
@@ -27,10 +36,10 @@ int main(int argc, char *argv[])
 
 	screen = DefaultScreenOfDisplay(dpy);
 
-	grabkey("Return");
-	grabkey("c");
-	grabkey("q");
-	grabkey("p");
+	grabkey(KEY_TERM);
+	grabkey(KEY_CLOSE);
+	grabkey(KEY_EXIT);
+	grabkey(KEY_DMENU);
 
 	while (1) {
 		XNextEvent(dpy, &event);
@@ -72,18 +81,18 @@ void map_window(const XMapRequestEvent event)
 
 void handle_keypress(XKeyEvent event)
 {
-	if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return")))
-		system(TERMINAL_CMD);
+	if (event.keycode == XKeysymToKeycode(dpy, XK_Return)) 
+		system(CMD_TERM);
 	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("c")))
 		XKillClient(dpy, event.subwindow);
 	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q")))
 		XCloseDisplay(dpy);
 	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("p")))
-		system("dmenu_run &");
+		system(CMD_DMENU);
 }
 
-void grabkey(char *key)
+void grabkey(int key)
 {
-	XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym(key)),
-			Mod1Mask|ShiftMask, DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+	XGrabKey(dpy, XKeysymToKeycode(dpy, key), 
+			KEY_MOD, DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
 }
