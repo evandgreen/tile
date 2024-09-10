@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	grabkey(KEY_EXIT);
 	grabkey(KEY_DMENU);
 
-	while (1) {
+	for (;;) {
 		XNextEvent(dpy, &event);
 
 		switch (event.type) {
@@ -81,14 +81,21 @@ void map_window(const XMapRequestEvent event)
 
 void handle_keypress(XKeyEvent event)
 {
-	if (event.keycode == XKeysymToKeycode(dpy, XK_Return)) 
+	int keycode = XKeysymToKeycode(dpy, event.keycode);
+	switch (keycode) {
+	case XK_Return:
 		system(CMD_TERM);
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("c")))
+		break;
+	case XK_c:
 		XKillClient(dpy, event.subwindow);
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("q")))
+		break;
+	case XK_q:
 		XCloseDisplay(dpy);
-	else if (event.keycode == XKeysymToKeycode(dpy, XStringToKeysym("p")))
+		break;
+	case XK_p:
 		system(CMD_DMENU);
+		break;
+	}
 }
 
 void grabkey(int key)
